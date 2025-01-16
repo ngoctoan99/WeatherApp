@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--Dimen-->
+    <dimen name="dimen_negative_12dp">-12dp</dimen>
+    <dimen name="dimen_negative_2dp">-2dp</dimen>
+    <dimen name="dimen_negative_30dp">-30dp</dimen>
+
+    <dimen name="dimen0dp">0dp</dimen>
+    <dimen name="dimen0_5dp">0.5dp</dimen>
+    <dimen name="dimen1dp">1dp</dimen>
+    <dimen name="dimen1_5dp">1.5dp</dimen>
+    <dimen name="dimen2dp">2dp</dimen>
+    <dimen name="dimen2_5dp">2.5dp</dimen>
+    <dimen name="dimen3dp">3dp</dimen>
+    <dimen name="dimen4dp">4dp</dimen>
+    <dimen name="dimen5dp">5dp</dimen>
+    <dimen name="dimen6dp">6dp</dimen>
+    <dimen name="dimen7dp">7dp</dimen>
+    <dimen name="dimen7.5dp">7.5dp</dimen>
+    <dimen name="dimen8dp">8dp</dimen>
+    <dimen name="dimen9dp">9dp</dimen>
+    <dimen name="dimen10dp">10dp</dimen>
+    <dimen name="negative_dimen10dp">-10dp</dimen>
+    <dimen name="dimen11dp">11dp</dimen>
+    <dimen name="dimen12dp">12dp</dimen>
+    <dimen name="dimen13dp">13dp</dimen>
+    <dimen name="dimen14dp">14dp</dimen>
+    <dimen name="dimen15dp">15dp</dimen>
+    <dimen name="dimen16dp">16dp</dimen>
+    <dimen name="dimen17dp">17dp</dimen>
+    <dimen name="dimen18dp">18dp</dimen>
+    <dimen name="dimen19dp">19dp</dimen>
+    <dimen name="dimen20dp">20dp</dimen>
+    <dimen name="dimen21dp">21dp</dimen>
+    <dimen name="dimen22dp">22dp</dimen>
+    <dimen name="dimen24dp">24dp</dimen>
+    <dimen name="dimen25dp">25dp</dimen>
+    <dimen name="dimen26dp">26dp</dimen>
+    <dimen name="dimen28dp">28dp</dimen>
+    <dimen name="dimen29dp">29dp</dimen>
+    <dimen name="dimen30dp">30dp</dimen>
+    <dimen name="dimen32dp">32dp</dimen>
+    <dimen name="dimen33dp">33dp</dimen>
+    <dimen name="dimen34dp">34dp</dimen>
+    <dimen name="dimen35dp">35dp</dimen>
+    <dimen name="dimen36dp">36dp</dimen>
+    <dimen name="dimen37dp">37dp</dimen>
+    <dimen name="dimen38dp">38dp</dimen>
+    <dimen name="dimen40dp">40dp</dimen>
+    <dimen name="dimen41dp">41dp</dimen>
+    <dimen name="dimen42dp">42dp</dimen>
+    <dimen name="dimen43dp">43dp</dimen>
+    <dimen name="dimen44dp">44dp</dimen>
+    <dimen name="dimen45dp">45dp</dimen>
+    <dimen name="dimen46dp">46dp</dimen>
+    <dimen name="dimen48dp">48dp</dimen>
+    <dimen name="dimen49dp">49dp</dimen>
+    <dimen name="dimen50dp">50dp</dimen>
+    <dimen name="dimen52dp">52dp</dimen>
+    <dimen name="dimen54dp">54dp</dimen>
+    <dimen name="dimen55dp">55dp</dimen>
+    <dimen name="dimen56dp">56dp</dimen>
+    <dimen name="dimen58dp">58dp</dimen>
+    <dimen name="dimen59dp">59dp</dimen>
+    <dimen name="dimen60dp">60dp</dimen>
+    <dimen name="dimen64dp">64dp</dimen>
+    <dimen name="dimen65dp">65dp</dimen>
+    <dimen name="dimen66dp">66dp</dimen>
+    <dimen name="dimen68dp">68dp</dimen>
+    <dimen name="dimen70dp">70dp</dimen>
+    <dimen name="dimen72dp">72dp</dimen>
+    <dimen name="dimen73dp">73dp</dimen>
+    <dimen name="dimen74dp">74dp</dimen>
+    <dimen name="dimen76dp">76dp</dimen>
+    <dimen name="dimen78dp">78dp</dimen>
+    <dimen name="dimen80dp">80dp</dimen>
+    <dimen name="dimen84dp">84dp</dimen>
+    <dimen name="dimen85dp">85dp</dimen>
+    <dimen name="dimen88dp">88dp</dimen>
+    <dimen name="dimen90dp">90dp</dimen>
+    <dimen name="dimen91dp">91dp</dimen>
+    <dimen name="dimen92dp">92dp</dimen>
+    <dimen name="dimen96dp">96dp</dimen>
+    <dimen name="dimen100dp">100dp</dimen>
+    <dimen name="dimen104dp">104dp</dimen>
+    <dimen name="dimen106dp">106dp</dimen>
+    <dimen name="dimen110dp">110dp</dimen>
+    <dimen name="dimen115dp">115dp</dimen>
+    <dimen name="dimen120dp">120dp</dimen>
+    <dimen name="dimen126dp">126dp</dimen>
+    <dimen name="dimen128dp">128dp</dimen>
+    <dimen name="dimen130dp">130dp</dimen>
+    <dimen name="dimen140dp">140dp</dimen>
+    <dimen name="dimen144dp">144dp</dimen>
+    <dimen name="dimen145dp">145dp</dimen>
+    <dimen name="dimen148dp">148dp</dimen>
+    <dimen name="dimen150dp">150dp</dimen>
+    <dimen name="dimen160dp">160dp</dimen>
+    <dimen name="dimen165dp">165dp</dimen>
+    <dimen name="dimen168dp">168dp</dimen>
+    <dimen name="dimen170dp">170dp</dimen>
+    <dimen name="dimen180dp">180dp</dimen>
+    <dimen name="dimen182dp">182dp</dimen>
+    <dimen name="dimen188dp">188dp</dimen>
+    <dimen name="dimen190dp">190dp</dimen>
+    <dimen name="dimen193dp">193dp</dimen>
+    <dimen name="dimen198dp">198dp</dimen>
+    <dimen name="dimen200dp">200dp</dimen>
+    <dimen name="dimen216dp">216dp</dimen>
+    <dimen name="dimen220dp">220dp</dimen>
+    <dimen name="dimen227dp">227dp</dimen>
+    <dimen name="dimen230dp">230dp</dimen>
+    <dimen name="dimen240dp">240dp</dimen>
+    <dimen name="dimen260dp">260dp</dimen>
+    <dimen name="dimen270dp">270dp</dimen>
+    <dimen name="dimen280dp">280dp</dimen>
+    <dimen name="dimen315dp">315dp</dimen>
+    <dimen name="dimen320dp">320dp</dimen>
+
+    <dimen name="text_size_1">1sp</dimen>
+    <dimen name="text_size_2">2sp</dimen>
+    <dimen name="text_size_3">3sp</dimen>
+    <dimen name="text_size_4">4sp</dimen>
+    <dimen name="text_size_5">5sp</dimen>
+    <dimen name="text_size_6">6sp</dimen>
+    <dimen name="text_size_7">7sp</dimen>
+    <dimen name="text_size_8">8sp</dimen>
+    <dimen name="text_size_9">9sp</dimen>
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_11">11sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_15">15sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_17">17sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_19">19sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_21">21sp</dimen>
+    <dimen name="text_size_22">22sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
+    <dimen name="text_size_25">25sp</dimen>
+    <dimen name="text_size_26">26sp</dimen>
+    <dimen name="text_size_28">28sp</dimen>
+    <dimen name="text_size_29">29sp</dimen>
+    <dimen name="text_size_30">30sp</dimen>
+    <dimen name="text_size_32">32sp</dimen>
+    <dimen name="text_size_33">33sp</dimen>
+    <dimen name="text_size_34">34sp</dimen>
+    <dimen name="text_size_35">35sp</dimen>
+    <dimen name="text_size_36">36sp</dimen>
+    <dimen name="text_size_37">37sp</dimen>
+    <dimen name="text_size_38">38sp</dimen>
+    <dimen name="text_size_40">40sp</dimen>
+    <dimen name="text_size_46">46sp</dimen>
+    <dimen name="text_size_64">64sp</dimen>
+
+    <dimen name="text_size_48">48sp</dimen>
+
+<!--    Country pickder-->
+    <dimen name="grid_0hx">4dp</dimen>
+    <dimen name="grid_1x">8dp</dimen>
+    <dimen name="grid_1hx">12dp</dimen>
+    <dimen name="grid_2x">16dp</dimen>
+    <dimen name="grid_2hx">20dp</dimen>
+    <dimen name="grid_3x">24dp</dimen>
+    <dimen name="grid_4x">32dp</dimen>
+    <dimen name="grid_5x">40dp</dimen>
+    <dimen name="grid_6x">48dp</dimen>
+    <dimen name="grid_7x">56dp</dimen>
+    <dimen name="grid_8x">64dp</dimen>
+    <dimen name="grid_9x">72dp</dimen>
+    <dimen name="grid_10x">80dp</dimen>
+
+
+    <dimen name="toggle_icon_width">24dp</dimen>
+    <dimen name="toggle_icon_height">24dp</dimen>
+    <dimen name="space_start_end">15dp</dimen>
+
+    <dimen name="dimen69dp">69dp</dimen>
+
+    <dimen name="dimen259dp">259dp</dimen>
+    <dimen name="dimen241dp">241dp</dimen>
+    <dimen name="dimen23dp">23dp</dimen>
+
+    <dimen name="dimen89dp">89dp</dimen>
+    <dimen name="dimen27dp">27dp</dimen>
+
+    <dimen name="text_size_title">20sp</dimen>
+    <dimen name="dimen136dp">136dp</dimen>
+
+<!--    padding-->
+    <dimen name="padding2">2dp</dimen>
+    <dimen name="padding5">5dp</dimen>
+    <dimen name="padding10">10dp</dimen>
+    <dimen name="padding15">15dp</dimen>
+    <dimen name="padding20">20dp</dimen>
+    <dimen name="padding30">30dp</dimen>
+ <!--    margin-->
+    <dimen name="margin5">5dp</dimen>
+    <dimen name="margin15">15dp</dimen>
+    <dimen name="margin_item_top_profile">16dp</dimen>
+<!--     bottom main-->
+    <dimen name="space_bottom">40dp</dimen>
+    <dimen name="height_bottom_view">80dp</dimen>
+    <dimen name="width_height_button_voice">75dp</dimen>
+    <dimen name="space_size_login">20dp</dimen>
+
+
+    <dimen name="design_bottom_navigation_item_max_width" tools:override="true">600dp</dimen>
+    <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">600dp</dimen>
+    <dimen name="dimen63dp">63dp</dimen>
+
+    <dimen name="keyboard_threshold">200dp</dimen>
+    <dimen name="dimen57dp">57dp</dimen>
+
+
+    <!--uCrop Activity-->
+    <dimen name="ucrop_padding_crop_frame">16dp</dimen>
+    <dimen name="ucrop_size_dot_scale_text_view">8dp</dimen>
+    <dimen name="ucrop_height_horizontal_wheel_progress_line">20dp</dimen>
+    <dimen name="ucrop_width_horizontal_wheel_progress_line">2dp</dimen>
+    <dimen name="ucrop_width_middle_wheel_progress_line">4dp</dimen>
+    <dimen name="ucrop_margin_horizontal_wheel_progress_line">10dp</dimen>
+    <dimen name="ucrop_height_wrapper_controls">64dp</dimen>
+    <dimen name="ucrop_height_wrapper_states">72dp</dimen>
+    <dimen name="ucrop_height_divider_shadow">3dp</dimen>
+    <dimen name="ucrop_text_size_widget_text">14sp</dimen>
+    <dimen name="ucrop_text_size_controls_text">14sp</dimen>
+    <dimen name="ucrop_margin_top_widget_text">10dp</dimen>
+    <dimen name="ucrop_margin_top_controls_text">4dp</dimen>
+    <dimen name="ucrop_size_wrapper_rotate_button">50dp</dimen>
+    <dimen name="ucrop_height_crop_aspect_ratio_text">40dp</dimen>
+    <dimen name="ucrop_progress_size">30dp</dimen>
+
+    <!--Crop View-->
+    <dimen name="ucrop_default_crop_logo_size">200dp</dimen>
+    <dimen name="ucrop_default_crop_grid_stoke_width">1dp</dimen>
+    <dimen name="ucrop_default_crop_frame_stoke_width">1dp</dimen>
+    <dimen name="ucrop_default_crop_rect_corner_touch_threshold">30dp</dimen>
+    <dimen name="ucrop_default_crop_rect_min_size">100dp</dimen>
+    <dimen name="ucrop_default_crop_rect_corner_touch_area_line_length">10dp</dimen>
+
+
+
+    <dimen name="card_view_radius">10dp</dimen>
+    <dimen name="magrin_10">10dp</dimen>
+    <dimen name="magrin_50">50dp</dimen>
+    <dimen name="magrin_5">5dp</dimen>
+    <!--Dimen-->
+
+
+    <dimen name="waveform_width">5dp</dimen>
+    <dimen name="dimen300dp">300dp</dimen>
+
+
+    <dimen name="text_size_detail_message">16sp</dimen>
+    <dimen name="text_size_detail_message_time">9sp</dimen>
+    <dimen name="width_height_image_avatar_detail_message">30dp</dimen>
+
+    <dimen name="width_height_image_avatar_home">50dp</dimen>
+    <dimen name="width_height_image_avatar_search">40dp</dimen>
+    <dimen name="width_height_image_avatar_people">50dp</dimen>
+    <dimen name="dimen250dp">250dp</dimen>
+    <dimen name="dimen82dp">82dp</dimen>
+
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">30sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">30sp</dimen>
+</resources>
