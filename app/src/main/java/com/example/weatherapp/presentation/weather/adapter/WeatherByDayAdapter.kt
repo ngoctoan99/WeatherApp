@@ -1,12 +1,15 @@
 package com.example.weatherapp.presentation.weather.adapter
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.base.BaseAdapter
 import com.example.weatherapp.databinding.ItemWeatherByDayBinding
 import com.example.weatherapp.domain.model.WeatherDay
+import com.example.weatherapp.extension.convertDateToDayOfWeek
 import com.example.weatherapp.extension.convertFtoCTemp
 import com.example.weatherapp.extension.selectImageWeather
 import javax.inject.Inject
@@ -59,7 +62,7 @@ class WeatherByDayAdapter @Inject constructor(
             binding.apply {
                 val tempMax = "${convertFtoCTemp(item.tempmax)}°C"
                 val tempMin = "${convertFtoCTemp(item.tempmin)}°C"
-               tvDay.text = item.datetime
+               tvDay.text = convertDateToDayOfWeek(item.datetime)
                 tvDescription.text = item.description
                 ivWeather.setImageResource(selectImageWeather(item.icon))
                 tvTempMax.text  = tempMax
