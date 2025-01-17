@@ -8,13 +8,13 @@ data class WeatherModel (
     val address: String,
     val timezone: String,
     val description: String,
-    val days: List<Day>,
+    val days: List<WeatherDay>,
     val alerts: List<Any?>,
-    val stations: Stations,
+//    val stations: Stations,
     val currentConditions: CurrentConditions,
 )
 
-data class Day(
+data class WeatherDay(
     val datetime: String,
     val datetimeEpoch: Long,
     val tempmax: Double,
@@ -51,10 +51,10 @@ data class Day(
     val icon: String,
     val stations: List<String>?,
     val source: String,
-    val hours: List<Hour>,
+    val hours: List<WeatherHour>,
 )
 
-data class Hour(
+data class WeatherHour(
     val datetime: String,
     val datetimeEpoch: Long,
     val temp: Double,

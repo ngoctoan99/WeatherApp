@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bg_bottom_navigation">#34141414</color>
     <color name="bg_bottom_navigation_select">#141414</color>
+    <color name="color_transparent">#66000000</color>
+    <color name="color_transparent_20">#68000000</color>
+    <color name="color_hint">#7E7E7E</color>
 </resources>

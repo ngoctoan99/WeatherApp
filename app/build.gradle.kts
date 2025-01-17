@@ -75,6 +75,11 @@ android {
                 name = "BASE_URL",
                 value = "\"https://weather.visualcrossing.com\""
             )
+            buildConfigField(
+                type = "String",
+                name = "API_KEY",
+                value = "\"2QLB9WJK8MDHRUWLK2TJ4SYDS\""
+            )
         }
         create("development") {
             dimension = "mode"
@@ -84,6 +89,11 @@ android {
                 name = "BASE_URL",
                 value = "\"https://weather.visualcrossing.com\""
             )
+            buildConfigField(
+                type = "String",
+                name = "API_KEY",
+                value = "\"2QLB9WJK8MDHRUWLK2TJ4SYDS\""
+            )
         }
         create("production") {
             dimension = "mode"
@@ -92,6 +102,11 @@ android {
                 type = "String",
                 name = "BASE_URL",
                 value = "\"https://weather.visualcrossing.com\""
+            )
+            buildConfigField(
+                type = "String",
+                name = "API_KEY",
+                value = "\"2QLB9WJK8MDHRUWLK2TJ4SYDS\""
             )
         }
     }
