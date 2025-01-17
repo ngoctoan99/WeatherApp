@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/rootViewMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
-    <TextView
-        android:text="@string/app_name"
-        android:textSize="30sp"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true">
+
+
+    <fragment
+        android:id="@+id/navigationHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/viewBackgroundBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/main_nav_graph" />
+
+    <View
+        android:id="@+id/viewBackgroundBottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="@dimen/dimen0dp"
+        android:background="@color/bg_bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="@+id/frmBottom"
+        app:layout_constraintTop_toTopOf="@+id/frmBottom" />
+
+    <FrameLayout
+        android:id="@+id/frmBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationViewMain"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen60dp"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            app:itemBackground="@color/select_bg_bottom_navigation"
+            android:minHeight="@dimen/dimen50dp"
+            app:elevation="0dp"
+            app:itemIconSize="@dimen/dimen24dp"
+            app:itemIconTint="@color/selector_bottom_navigation_icon"
+            app:itemRippleColor="@android:color/transparent"
+            app:itemTextColor="@color/selector_bottom_navigation_icon"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/menu_bottom_main" />
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
