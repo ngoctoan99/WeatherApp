@@ -1,6 +1,7 @@
 package com.example.weatherapp.presentation.weather
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.base.BaseViewModel
 import com.example.weatherapp.data.request.RequestWeatherByLocation
@@ -29,7 +30,9 @@ class WeatherViewModel@Inject constructor(
 ):BaseViewModel(contextProvider){
     private val _getWeatherByLocationState = MutableStateFlow<GetWeatherState>(GetWeatherState.Loading(false))
     val getWeatherByLocationState = _getWeatherByLocationState.asStateFlow()
-
+    var latitude = MutableLiveData<Double>()
+    var longitude = MutableLiveData<Double>()
+    var nameLocation = MutableLiveData<String>()
     fun getWeatherByLocation(location : String , key : String){
         launchCoroutineIO {
             getWeatherLocationUseCase.execute(
