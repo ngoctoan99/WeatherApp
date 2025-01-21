@@ -1,13 +1,13 @@
 package com.example.weatherapp.presentation.weather
-import android.Manifest
+
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -16,11 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.base.BaseFragment
+import com.example.weatherapp.core.DialogChangeLocation
 import com.example.weatherapp.databinding.FragmentWeatherBinding
 import com.example.weatherapp.domain.model.WeatherModel
 import com.example.weatherapp.extension.MANDATORY_PERMISSIONS_APP
-import com.example.weatherapp.extension.REQUEST_PERMISSIONS_CODE_LOCATION
-import com.example.weatherapp.extension.REQUEST_PERMISSIONS_CODE_POST_NOTIFICAION
 import com.example.weatherapp.extension.convertFtoCTemp
 import com.example.weatherapp.extension.hasPermissionDeny
 import com.example.weatherapp.extension.selectImageWeather
@@ -28,11 +27,11 @@ import com.example.weatherapp.presentation.weather.adapter.WeatherByDayAdapter
 import com.example.weatherapp.presentation.weather.adapter.WeatherByHourAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 
@@ -57,15 +56,20 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
         binding.ivRefresh.setOnClickListener {
             checkStatusPermissionLocation()
         }
+        binding.tvLocation.setOnClickListener {
+            val dialogChangeLocation  = DialogChangeLocation(object : DialogChangeLocation.ActionEditLocationInterface{
+                override fun click(location: String) {
+                    viewModel.getWeatherByLocation(location,BuildConfig.API_KEY)
+                }
+            })
+            dialogChangeLocation.show(
+                requireActivity().supportFragmentManager,
+                "dialog_change_location"
+            )
 
-        binding.ivLocation.setOnClickListener {
-            checkStatusPermissionLocation()
         }
-
     }
-
     private fun checkStatusPermissionLocation() {
-
         val notGrantedPermissions = MANDATORY_PERMISSIONS_APP["Location"]!!.filter {
             ContextCompat.checkSelfPermission(
                 requireContext(), it
@@ -99,18 +103,35 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
                             permission
                         )
                     ) {
-                        // Show rationale for requesting the permission
-                        // You can display a dialog or a message explaining why the permission is needed
                         return@registerForActivityResult
                     } else if (requireActivity().hasPermissionDeny(permission)) {
-                        // Permission has been denied and "Don't show again" has been checked
-                        // Handle the scenario where the user has explicitly denied the permission
+                        onPermissionDenied()
                         return@registerForActivityResult
 
                     }
                 }
             }
         }
+    }
+
+    private fun onPermissionDenied() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Grant Permission Denied")
+            .setMessage("You have denied access. Some features may not work.")
+            .setPositiveButton("Setting") { _, _ ->
+                openAppSettings()
+            }
+            .setNegativeButton("Close") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun openAppSettings() {
+        val intent = android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = android.net.Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
+        intent.data = uri
+        startActivity(intent)
     }
 
     private fun initViewStateChange() {
@@ -139,10 +160,10 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
         try {
             val addresses = geocoder.getFromLocation(latitude, longitude, 1)
             if (!addresses.isNullOrEmpty()) {
-                address = addresses[0].getAddressLine(0) // Full address
+//                address = addresses[0].getAddressLine(0) // Full address
                 val city = addresses[0].locality // City
                 val country = addresses[0].countryName // Country
-
+                address = "${country},${city}"
                 println("Address: $address")
                 println("City: $city")
                 println("Country: $country")
@@ -204,6 +225,7 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
         when(event){
             is GetWeatherState.Error ->{
                 handleLoading(false)
+                Toast.makeText(requireContext(), event.error,Toast.LENGTH_SHORT).show()
             }
             is GetWeatherState.Loading ->{
                 handleLoading(event.isLoading)
