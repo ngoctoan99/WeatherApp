@@ -25,6 +25,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".presentation.weatherWidget.WeatherWidgetProvider" android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_PICK"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/weather_widget_info"/>
+        </receiver>
+        <receiver android:name=".presentation.weatherWidget.broadCast.ActionClickBroadcastReceiver" android:exported="true"/>
     </application>
 
 </manifest>

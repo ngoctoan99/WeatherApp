@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
+import android.view.TextureView
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,12 +18,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.base.BaseFragment
 import com.example.weatherapp.core.DialogChangeLocation
+import com.example.weatherapp.data.local.CachePreferencesHelper
 import com.example.weatherapp.databinding.FragmentWeatherBinding
 import com.example.weatherapp.domain.model.WeatherModel
 import com.example.weatherapp.extension.MANDATORY_PERMISSIONS_APP
 import com.example.weatherapp.extension.convertFtoCTemp
 import com.example.weatherapp.extension.hasPermissionDeny
+import com.example.weatherapp.extension.jsonToObjectUsingMoshi
+import com.example.weatherapp.extension.jsonToStringUsingMoshi
 import com.example.weatherapp.extension.selectImageWeather
+import com.example.weatherapp.extension.updateDataWidget
 import com.example.weatherapp.presentation.weather.adapter.WeatherByDayAdapter
 import com.example.weatherapp.presentation.weather.adapter.WeatherByHourAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -47,19 +52,25 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    @Inject
+    lateinit var cachePreferencesHelper: CachePreferencesHelper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         initViewStateChange()
-        checkStatusPermissionLocation()
-
+//        checkStatusPermissionLocation()
+        if(cachePreferencesHelper.dataWeather.isNotEmpty()){
+            initView(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)!!)
+        }
         binding.ivRefresh.setOnClickListener {
             checkStatusPermissionLocation()
         }
         binding.tvLocation.setOnClickListener {
             val dialogChangeLocation  = DialogChangeLocation(object : DialogChangeLocation.ActionEditLocationInterface{
                 override fun click(location: String) {
-                    viewModel.getWeatherByLocation(location,BuildConfig.API_KEY)
+                    if(location.trim().isNotEmpty()){
+                        viewModel.getWeatherByLocation(location,BuildConfig.API_KEY)
+                    }
                 }
             })
             dialogChangeLocation.show(
@@ -145,7 +156,7 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
                 viewModel.longitude.value = location.longitude
                 viewModel.nameLocation.value =  getAddressFromLocation(location.latitude, location.longitude)
 //                viewModel.getWeatherByLocation("${viewModel.latitude.value},${viewModel.longitude.value}",BuildConfig.API_KEY)
-                viewModel.getWeatherByLocation("${viewModel.nameLocation.value}",BuildConfig.API_KEY)
+//                viewModel.getWeatherByLocation("${viewModel.nameLocation.value}",BuildConfig.API_KEY)
                 println("Vĩ độ: ${viewModel.latitude.value}, Kinh độ: ${viewModel.longitude.value}")
             } else {
                 println("Không thể lấy vị trí hiện tại")
@@ -153,7 +164,9 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
         }.addOnFailureListener {
             println("Lỗi khi lấy vị trí: ${it.message}")
         }
+        viewModel.getWeatherByLocation("${viewModel.nameLocation.value}",BuildConfig.API_KEY)
     }
+
     private fun getAddressFromLocation(latitude: Double, longitude: Double) : String {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         var address  = ""
@@ -175,8 +188,6 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
         }
         return address
     }
-
-
 
     @SuppressLint("NotifyDataSetChanged")
     private fun initView(data:WeatherModel){
@@ -225,14 +236,22 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
         when(event){
             is GetWeatherState.Error ->{
                 handleLoading(false)
-                Toast.makeText(requireContext(), event.error,Toast.LENGTH_SHORT).show()
+                if(viewModel.isCanCallAPIGetWeather){
+                    viewModel.isCanCallAPIGetWeather = false
+                    handleErrorMessage(message = event.error, statusCode = event.statusCode)
+                }
             }
             is GetWeatherState.Loading ->{
                 handleLoading(event.isLoading)
             }
             is GetWeatherState.Success ->{
                 handleLoading(false)
-                initView(event.data)
+                if(viewModel.isCanCallAPIGetWeather){
+                    viewModel.isCanCallAPIGetWeather = false
+                    initView(event.data)
+                    cachePreferencesHelper.dataWeather = jsonToStringUsingMoshi(event.data)
+                    updateDataWidget(requireContext())
+                }
             }
         }
     }

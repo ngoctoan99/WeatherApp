@@ -1,13 +1,17 @@
 package com.example.weatherapp.extension
 
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
-
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.weatherapp.R
+import com.example.weatherapp.domain.model.WeatherModel
+import com.example.weatherapp.presentation.weatherWidget.WeatherWidgetProvider
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -72,8 +76,31 @@ fun convertDateToDayOfWeek(dateString: String): String {
         DayOfWeek.THURSDAY -> "Thursday"
         DayOfWeek.FRIDAY -> "Friday"
         DayOfWeek.SATURDAY -> "Saturday"
-        DayOfWeek.SUNDAY -> "Sunday`"
+        DayOfWeek.SUNDAY -> "Sunday"
     }
+}
+
+fun jsonToStringUsingMoshi(weatherModel: WeatherModel): String {
+    val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()) .build()
+    val adapter = moshi.adapter(WeatherModel::class.java)
+    return adapter.toJson(weatherModel)
+}
+
+fun jsonToObjectUsingMoshi(jsonStr: String): WeatherModel? {
+    val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()) .build()
+    val adapter = moshi.adapter(WeatherModel::class.java)
+    return adapter.fromJson(jsonStr)
+}
+
+fun updateDataWidget(context: Context){
+    val intent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+    intent.setComponent(
+        ComponentName(
+            context,
+            WeatherWidgetProvider::class.java
+        )
+    )
+    context.sendBroadcast(intent)
 }
 
 

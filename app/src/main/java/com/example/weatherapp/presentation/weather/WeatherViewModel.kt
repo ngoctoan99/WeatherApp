@@ -33,7 +33,9 @@ class WeatherViewModel@Inject constructor(
     var latitude = MutableLiveData<Double>()
     var longitude = MutableLiveData<Double>()
     var nameLocation = MutableLiveData<String>()
+    var isCanCallAPIGetWeather = false
     fun getWeatherByLocation(location : String , key : String){
+        isCanCallAPIGetWeather = true
         launchCoroutineIO {
             getWeatherLocationUseCase.execute(
                 RequestWeatherByLocation(

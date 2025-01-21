@@ -1,5 +1,7 @@
 package com.example.weatherapp.domain.model
 
+import com.squareup.moshi.Moshi
+
 data class WeatherModel (
     val queryCost: Long,
     val latitude: Double,
