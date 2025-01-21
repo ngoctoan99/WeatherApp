@@ -45,9 +45,6 @@ class WeatherWidgetProvider : AppWidgetProvider() {
 
     private fun setViewData(views: RemoteViews, context: Context) {
         val cachePreferencesHelper = CachePreferencesHelper(context)
-        val tempValue = "${convertFtoCTemp(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.days?.get(0)?.tempmax!!)}°C - " +
-                "${convertFtoCTemp(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.days?.get(0)?.tempmin!!)}°C"
-
         val temp = "${convertFtoCTemp(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.days?.get(0)?.temp!!)}°C"
         views.setTextViewText(R.id.tvTemp, temp)
         views.setTextViewText(R.id.tvDescription,jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.days?.get(0)?.description)

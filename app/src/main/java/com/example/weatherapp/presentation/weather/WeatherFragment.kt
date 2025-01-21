@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
-import android.view.TextureView
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -36,7 +34,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 
@@ -58,7 +55,6 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         initViewStateChange()
-//        checkStatusPermissionLocation()
         if(cachePreferencesHelper.dataWeather.isNotEmpty()){
             initView(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)!!)
         }
