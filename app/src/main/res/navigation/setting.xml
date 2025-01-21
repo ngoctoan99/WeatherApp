@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/settingFragment"
         tools:layout="@layout/fragment_setting"
-        android:name="com.example.weatherapp.presentation.history.SettingFragment"
+        android:name="com.example.weatherapp.presentation.setting.SettingFragment"
         android:label="fragment_setting" >
     </fragment>
 </navigation>
