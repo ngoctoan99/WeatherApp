@@ -11,7 +11,7 @@ data class WeatherModel (
     val timezone: String,
     val description: String,
     val days: List<WeatherDay>,
-    val alerts: List<Any?>,
+    val alerts: List<Alert?>,
 //    val stations: Stations,
     val currentConditions: CurrentConditions,
 )
@@ -129,4 +129,9 @@ data class CurrentConditions(
     val sunset: String,
     val sunsetEpoch: Double,
     val moonphase: Double,
+)
+
+data class Alert (
+    val event : String,
+    val description: String
 )

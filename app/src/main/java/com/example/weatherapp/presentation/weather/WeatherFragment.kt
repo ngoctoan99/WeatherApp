@@ -1,19 +1,26 @@
 package com.example.weatherapp.presentation.weather
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.BuildConfig
+import com.example.weatherapp.R
 import com.example.weatherapp.base.BaseFragment
 import com.example.weatherapp.core.DialogChangeLocation
 import com.example.weatherapp.data.local.CachePreferencesHelper
@@ -34,6 +41,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 
@@ -247,8 +255,56 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
                     initView(event.data)
                     cachePreferencesHelper.dataWeather = jsonToStringUsingMoshi(event.data)
                     updateDataWidget(requireContext())
+
+                    if(event.data.alerts.isNotEmpty()){
+                        showAlertWeatherNotification(event.data)
+                    }
                 }
             }
+        }
+    }
+
+    private fun createNotificationChannel(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channelId = "weather_channel_id"
+            val channelName = "Weather App"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, channelName, importance).apply {
+                description = "Weather App Description"
+            }
+            val notificationManager: NotificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+    @SuppressLint("MissingPermission")
+    private fun showNotification(context: Context, title: String, message: String) {
+        val channelId = "weather_channel_id"
+        val notificationId = 1
+
+        val builder = NotificationCompat.Builder(context, channelId)
+            .setSmallIcon(R.mipmap.ic_launcher)  // Notification icon
+            .setContentTitle(title)  // Notification title
+            .setContentText(message)  // Notification message
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)  // Set priority
+            .setAutoCancel(true)  // Dismiss notification when tapped
+
+        val notificationManager = NotificationManagerCompat.from(context)
+        notificationManager.notify(notificationId, builder.build())
+    }
+
+    private fun showAlertWeatherNotification(data: WeatherModel){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+                Timber.i("Permission Denied")
+            }else {
+                createNotificationChannel(requireContext())
+                showNotification(requireContext(), data.alerts[0]?.event.toString(), data.alerts[0]?.description.toString())
+            }
+        }else {
+            createNotificationChannel(requireContext())
+            showNotification(requireContext(), data.alerts[0]?.event.toString(), data.alerts[0]?.description.toString())
         }
     }
 }
