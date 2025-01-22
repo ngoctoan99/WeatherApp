@@ -283,7 +283,7 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
         val notificationId = 1
 
         val builder = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.mipmap.ic_launcher)  // Notification icon
+            .setSmallIcon(android.R.drawable.ic_dialog_info)  // Notification icon
             .setContentTitle(title)  // Notification title
             .setContentText(message)  // Notification message
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)  // Set priority
