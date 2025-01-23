@@ -5,6 +5,8 @@
     android:id="@+id/main_nav_graph"
     app:startDestination="@+id/weather">
     <include app:graph="@navigation/weather"/>
+    <include app:graph="@navigation/radar"/>
     <include app:graph="@navigation/setting"/>
+
 </navigation>
 

@@ -16,11 +16,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.weatherapp.R
 import com.example.weatherapp.base.BaseActivity
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.extension.MANDATORY_PERMISSIONS_APP
-import com.example.weatherapp.extension.REQUEST_PERMISSIONS_CODE_POST_NOTIFICAION
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
-
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
@@ -31,22 +27,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window?.apply {
-            // Show status and navigation bars
-            decorView.windowInsetsController?.show(
-                WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars()
-            )
-
-            // Set non-transparent colors for the bars
-        }
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            checkStatusPermissionPostNotification()
-
-        } else {
-           Timber.i("TTT")
         }
     }
 
@@ -78,37 +60,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.frmBottom.visibility = View.VISIBLE
         binding.viewBackgroundBottom.visibility = View.VISIBLE
     }
-    private fun checkStatusPermissionPostNotification() {
 
-        // Check if all permissions are granted
-        val notGrantedPermissions = MANDATORY_PERMISSIONS_APP["PostNotification"]!!.filter {
-            ContextCompat.checkSelfPermission(
-                this, it
-            ) != PackageManager.PERMISSION_GRANTED
-        }
-
-        if (notGrantedPermissions.isEmpty()) {
-
-        } else {
-            // Request the permissions
-            ActivityCompat.requestPermissions(
-                this,
-                notGrantedPermissions.toTypedArray(),
-                REQUEST_PERMISSIONS_CODE_POST_NOTIFICAION
-            )
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_PERMISSIONS_CODE_POST_NOTIFICAION) {
-            if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-                // All permissions are granted
-                // Do something that requires the permissions
-            }
-        }
-    }
 
 }

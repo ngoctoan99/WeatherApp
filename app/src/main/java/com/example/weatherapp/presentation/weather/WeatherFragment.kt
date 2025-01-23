@@ -258,7 +258,13 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
                     updateDataWidget(requireContext())
 
                     if(event.data.alerts.isNotEmpty()){
-                        showAlertWeatherNotification(event.data)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.POST_NOTIFICATIONS)
+                                == PackageManager.PERMISSION_GRANTED) {
+                                showAlertWeatherNotification(event.data)
+                            }
+                        }
+
                     }
                 }
             }
