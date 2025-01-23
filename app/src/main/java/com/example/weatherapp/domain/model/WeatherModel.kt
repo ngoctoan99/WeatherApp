@@ -32,7 +32,7 @@ data class WeatherDay(
 //    val precipcover: Double,
 //    val preciptype: List<String>?,
     val snow: Double,
-    val snowdepth: Double,
+//    val snowdepth: Double?,
     val windgust: Double,
     val windspeed: Double,
     val winddir: Double,
