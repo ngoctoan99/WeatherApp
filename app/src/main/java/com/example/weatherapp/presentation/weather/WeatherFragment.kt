@@ -20,7 +20,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.BuildConfig
-import com.example.weatherapp.R
 import com.example.weatherapp.base.BaseFragment
 import com.example.weatherapp.core.DialogChangeLocation
 import com.example.weatherapp.data.local.CachePreferencesHelper
@@ -65,6 +64,8 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
         initViewStateChange()
         if(cachePreferencesHelper.dataWeather.isNotEmpty()){
             initView(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)!!)
+        }else {
+            checkStatusPermissionLocation()
         }
         binding.ivRefresh.setOnClickListener {
             checkStatusPermissionLocation()
@@ -196,17 +197,17 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
     @SuppressLint("NotifyDataSetChanged")
     private fun initView(data:WeatherModel){
         binding.apply {
-            val temp = "${convertFtoCTemp(data.days[0].temp)}°C"
-            val sunset = "Sunset : ${data.days[0].sunset}"
-            val sunrise = "Sunrise : ${data.days[0].sunrise}"
+            val temp = "${convertFtoCTemp(data.currentConditions.temp)}°C"
+            val sunset = "Sunset : ${data.currentConditions.sunset}"
+            val sunrise = "Sunrise : ${data.currentConditions.sunrise}"
             val date = "Today"
-            val winSpeed = "${data.days[0].windspeed}"
-            val uv = "${data.days[0].uvindex}"
-            val pressure = "${data.days[0].pressure}"
-            val humidity = "${data.days[0].humidity}"
-            val visibility = "${data.days[0].visibility}"
-            val dewPoint = "${data.days[0].dew}"
-            iconWeather.setImageResource(selectImageWeather(data.days[0].icon))
+            val winSpeed = "${data.currentConditions.windspeed}"
+            val uv = "${data.currentConditions.uvindex}"
+            val pressure = "${data.currentConditions.pressure}"
+            val humidity = "${data.currentConditions.humidity}"
+            val visibility = "${data.currentConditions.visibility}"
+            val dewPoint = "${data.currentConditions.dew}"
+            iconWeather.setImageResource(selectImageWeather(data.currentConditions.icon))
             tvDateDetail.text = data.days[0].datetime
             tvTemp.text = temp
             tvLocation.text = data.resolvedAddress
@@ -227,10 +228,10 @@ class WeatherFragment : BaseFragment<FragmentWeatherBinding, WeatherViewModel>()
 
             weatherByHourAdapter.list = data.days[0].hours
             weatherByHourAdapter.notifyDataSetChanged()
-             rvWeatherByDay.apply {
+            rvWeatherByDay.apply {
                  adapter = weatherByDayAdapter
                  layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,false)
-             }
+            }
             weatherByDayAdapter.list = data.days.subList(1,8)
             weatherByDayAdapter.notifyDataSetChanged()
         }

@@ -45,11 +45,11 @@ class WeatherWidgetProvider : AppWidgetProvider() {
 
     private fun setViewData(views: RemoteViews, context: Context) {
         val cachePreferencesHelper = CachePreferencesHelper(context)
-        val temp = "${convertFtoCTemp(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.days?.get(0)?.temp!!)}°C"
+        val temp = "${convertFtoCTemp(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.currentConditions?.temp!!)}°C"
         views.setTextViewText(R.id.tvTemp, temp)
         views.setTextViewText(R.id.tvDescription,jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.days?.get(0)?.description)
         views.setTextViewText(R.id.tvLocation,jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.resolvedAddress)
-        views.setImageViewResource(R.id.ivWeather, selectImageWeather(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.days?.get(0)?.icon.toString()))
+        views.setImageViewResource(R.id.ivWeather, selectImageWeather(jsonToObjectUsingMoshi(cachePreferencesHelper.dataWeather)?.currentConditions?.icon.toString()))
         views.setOnClickPendingIntent(R.id.llWidget, createPendingIntentToOpenLink(context))
     }
 
