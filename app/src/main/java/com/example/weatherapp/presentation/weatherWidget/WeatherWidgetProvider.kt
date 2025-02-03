@@ -1,5 +1,6 @@
 package com.example.weatherapp.presentation.weatherWidget
 
+import android.app.Activity
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -9,14 +10,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.RemoteViews
+import android.widget.Toast
 import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.R
 import com.example.weatherapp.data.local.CachePreferencesHelper
 import com.example.weatherapp.extension.convertFtoCTemp
 import com.example.weatherapp.extension.jsonToObjectUsingMoshi
 import com.example.weatherapp.extension.selectImageWeather
+import com.example.weatherapp.extension.showToast
 import com.example.weatherapp.presentation.weatherWidget.broadCast.ActionClickBroadcastReceiver
 import com.example.weatherapp.utils.Constant
+import com.example.weatherapp.utils.ToastTypes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class WeatherWidgetProvider : AppWidgetProvider() {
     private var remoteViews: RemoteViews? = null
@@ -95,5 +104,15 @@ class WeatherWidgetProvider : AppWidgetProvider() {
 
         updateUIWidget(appWidgetId, context, appWidgetManager)
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
+    }
+
+    override fun onEnabled(context: Context) {
+        super.onEnabled(context)
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(1000)
+            withContext(Dispatchers.Main){
+                context.showToast("Added","Widget added successfully",ToastTypes.SUCCESS)
+            }
+        }
     }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/cardRootToast"
+    app:cardElevation="@dimen/dimen4dp"
+    android:layout_marginHorizontal="@dimen/dimen5dp"
+    app:cardBackgroundColor="@color/color_toast_success"
+    app:cardCornerRadius="@dimen/dimen5dp">
+    <RelativeLayout
+        android:id="@+id/rltContent"
+        android:paddingHorizontal="@dimen/dimen5dp"
+        android:background="@color/color_toast_success_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingVertical="@dimen/dimen5dp"
+        android:layout_marginStart="@dimen/dimen2dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivToast"
+            android:layout_marginEnd="@dimen/dimen5dp"
+            android:layout_width="@dimen/dimen25dp"
+            android:layout_height="@dimen/dimen25dp"
+            tools:srcCompat="@drawable/ic_toast_success"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/ivCloseToast"
+            android:layout_marginEnd="@dimen/dimen5dp"
+            android:layout_width="@dimen/dimen24dp"
+            android:layout_height="@dimen/dimen24dp"
+            app:tint="@color/color_toast_success"
+            app:srcCompat="@drawable/ic_close"/>
+        <TextView
+            android:id="@+id/tvTitleToast"
+            android:layout_marginHorizontal="@dimen/dimen5dp"
+            android:layout_toEndOf="@+id/ivToast"
+            android:layout_toStartOf="@+id/ivCloseToast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            tools:text="Success" />
+        <TextView
+            android:layout_marginTop="@dimen/dimen2dp"
+            android:id="@+id/tvDesToast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitleToast"
+            android:layout_marginHorizontal="@dimen/dimen5dp"
+            android:layout_toEndOf="@+id/ivToast"
+            android:layout_toStartOf="@+id/ivCloseToast"
+            android:textColor="#000000"
+            tools:text="What the weather like?" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
